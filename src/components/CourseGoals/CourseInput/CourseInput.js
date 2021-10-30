@@ -12,7 +12,13 @@ const CourseInput = props => {
 
   const formSubmitHandler = event => {
     event.preventDefault();
-    props.onAddGoal(enteredValue);
+    if(enteredValue.trim().length===0){
+      alert ("Goal can not be empty !")
+    }
+    else{
+      props.onAddGoal(enteredValue);
+    }
+    
   };
 
   return (
