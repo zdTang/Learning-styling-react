@@ -5,6 +5,7 @@ import './CourseInput.css';
 
 const CourseInput = props => {
   const [enteredValue, setEnteredValue] = useState('');
+  const [isValid,setIsValid]=useState(true)             //  set boolean to trigger style
 
   const goalInputChangeHandler = event => {
     setEnteredValue(event.target.value);
@@ -13,7 +14,8 @@ const CourseInput = props => {
   const formSubmitHandler = event => {
     event.preventDefault();
     if(enteredValue.trim().length===0){
-      alert ("Goal can not be empty !")
+      //alert ("Goal can not be empty !")
+      setIsValid(false)
     }
     else{
       props.onAddGoal(enteredValue);
@@ -24,7 +26,7 @@ const CourseInput = props => {
   return (
     <form onSubmit={formSubmitHandler}>
       <div className="form-control">
-        <label>Course Goal</label>
+        <label style={isValid?{color:'green'}:{color:'red'}}>Course Goal</label>
         <input type="text" onChange={goalInputChangeHandler} />
       </div>
       <Button type="submit">Add Goal</Button>
